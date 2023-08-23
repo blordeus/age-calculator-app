@@ -30,7 +30,7 @@ body {
   border-radius: 1rem 1rem 10rem 1rem;
   background-color: var(--White);
   padding: 2rem;
-  max-width: 100vw;
+  max-width: 90vw;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .input-label-container input {
-  width: 130px;
+  width: 130opx;
   padding: 0.75rem 1rem 0.75rem 1.25rem;
   font-size: 1.5rem;
   color: var(--Off-black);
@@ -163,5 +163,9 @@ body {
 
 .card-container {
   border-radius: 1rem 1rem 5rem 1rem;
+}
+
+.output-container h1 {
+  font-size: 2.5rem;
 }
 }
