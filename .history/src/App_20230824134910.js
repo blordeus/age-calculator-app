@@ -31,28 +31,10 @@ const App = () => {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     const day = today.getDate();
-    const yy = parseInt(date[0]);
-    const mm = parseInt(date[1]);
-    const dd = parseInt(date[2]);
-    let years, months, days;
-
-    months = month - mm;
-    if (day < dd) {
-      months = months - 1;
-    }
-
-    years = year - yy;
-    if (month * 100 + day < mm * 100 + dd) {
-      years = years - 1;
-      months = months + 12;
-    }
-
-    days = Math.floor(
-      (today.getTime() - new Date(yy + years, mm + months - 1, dd).getTime()) /
-      (24 * 60 * 60 * 1000)
-    );
-
-    return { years: years, months: months, days: days};
+    const y = parseInt(date[0]);
+    const m = parseInt(date[1]);
+    const d = parseInt(date[2]);
+    let year
   }
 
   const handleSubmit = (day, month, year) => {
@@ -84,14 +66,13 @@ const App = () => {
       return flase;
     };
 
-    const isDayInputValid = 
-    dayAsNumber >= 1 && 
-    ((monthAsNumber !=== 2 && dayAsNumber < (currentMonth?.days || 31)) || 
+    const isDayInputValid = daysAsNumber > 1 && 
+    ((monthAsNumber == 2 && dayAsNumber < (currentMonth?.days || 31)) || 
     validateDaysForFebruary());
 
-    const isMonthInputValid = monthAsNumber >= 1 && monthAsNumber <= 12;
+    const isMonthInputValid = monthAsNumber > 1 && monthAsNumber < 12;
 
-    const isYearInputValid = yearAsNumber  >= 1 && yearAsNumber <= today.getFullYear();
+    const isYearInputValid = yearAsNumber  > 1 && yearAsNumber < today.getFullYear();
 
     const isPastDate = today - chosenDate < 0;
 
@@ -140,7 +121,7 @@ const App = () => {
           generic: "",
         }));
       } else if (isPrecheckValid && isPastDue) {
-        setFormErrors(() => ({
+        setFormErrors((prevState) => ({
           day: "",
           month: "",
           year: "",
@@ -156,27 +137,8 @@ const App = () => {
           day: formErrors.day && isDayInputValid ? "" : prevState.day,
           generic: "",
         }));
-      } else {
-        if (hasErrors) {
-          setFormErrors({
-            day: "",
-            month: "",
-            year: "",
-            generic: "",
-          });
-        }
-
-          const formattedDate = `${year}-${month}-${day}`;
-          const {years, months, days} = dateDiff(formattedDate);
-
-          setOutput({
-            days: days,
-            months: months,
-            years: years,
-          });
-        }
       }
-    };
+    }
 
   return (
     <div className="card-container">

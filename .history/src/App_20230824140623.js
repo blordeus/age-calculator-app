@@ -85,7 +85,7 @@ const App = () => {
     };
 
     const isDayInputValid = 
-    dayAsNumber >= 1 && 
+    daysAsNumber >= 1 && 
     ((monthAsNumber !=== 2 && dayAsNumber < (currentMonth?.days || 31)) || 
     validateDaysForFebruary());
 
@@ -164,7 +164,7 @@ const App = () => {
             year: "",
             generic: "",
           });
-        }
+          
 
           const formattedDate = `${year}-${month}-${day}`;
           const {years, months, days} = dateDiff(formattedDate);
@@ -176,7 +176,7 @@ const App = () => {
           });
         }
       }
-    };
+    }
 
   return (
     <div className="card-container">
